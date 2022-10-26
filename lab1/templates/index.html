@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+
+    <link href="{% static '/css/bootstrap/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/js/jquery-ui-1.13.2/jquery-ui.min.css' %} ">
+
+    <!-- custom-->
+    <link href="{% static '/css/my_css.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <!--HEADER--> 
+    {% include "./header.html" %}
+    <!--HEADER-->
+
+    <div class="container p-5" style="padding-top: 80px !important;">
+        
+        <div class="text-center" style="padding-bottom: 20px;">
+            <img src="{% static '/imgs/premier2.png' %}" alt="premier" width="30%">
+        </div>
+
+        <!-- <hr/> -->
+
+        <div class="pt-5">
+            <h3>Matches</h3>
+        <table class="table table-responsive table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th style="min-width: 100px;">Team 1</th>
+                <th style="min-width: 100px;">Team 2</th>
+                <th class="text-center" style="max-width: 40px;">Score</th>
+                <th class="text-center">Date & Time</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td class="text-center">3:2</td>
+                <td class="text-center">@mdo</td>
+                <td class="text-center" style="max-width: 30px;"><a class="badge bg-badge" href="/details">Details</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pt-5">
+            <h3>Ranking</h3>
+        <table class="table   table-responsive table-bordered">
+            <thead class="thead-light">
+              <tr class="text-center">
+                <th style="text-align: left;">#</th>
+                <th style="min-width: 100px; text-align: left;">Team</th>
+                <th  style="max-width: 30px;">Played</th>
+                <th  style="max-width: 30px;">Won</th>
+                <th  style="max-width: 30px;">Lost</th>
+                <th  style="max-width: 30px;">Drawn</th>
+                <th  style="max-width: 30px;">Points</th>
+                <th>Last 5</th>
+                <th>Win %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <th scope="row" style="text-align: left;">1</th>
+                <td style="text-align: left;">Mark</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>12</td>
+                <td style="max-width: 80px;">
+                  <span class="btn btn-sm btn-success" data-toggle="tooltip" title="date, team">W</span>
+                  <span class="btn btn-sm btn-success">W</span>
+                  <span class="btn btn-sm btn-success">W</span>
+                  <span class="btn btn-sm btn-success">W</span>
+                  <span class="btn btn-sm btn-success">W</span>
+                </td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+
+
+    <!--FOOTER--> 
+    {% include "./footer.html" %}
+    <!--FOOTER-->
+
+</body>
+
+<script src="{% static '/js/jquery-ui-1.13.2/external/jquery/jquery.js' %}"></script>
+<script src="{% static '/js/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
+<script src="{% static '/js/bootstrap/bootstrap.js' %}"></script>
+<script src="{% static '/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+</html>
+<script>
+    $('[data-toggle="tooltip"]').tooltip()
+</script>
+
+

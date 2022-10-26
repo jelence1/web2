@@ -1,5 +1,5 @@
 # README
 
-Repozitorij za predmet Napredni razvoj programske potpore za web.
+Repozitorij za laboratorijske vježbe predmeta "Napredni razvoj programske potpore za web".
 
 LP

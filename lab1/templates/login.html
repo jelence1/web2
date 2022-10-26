@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+
+    <link href="{% static '/css/bootstrap/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static '/css/my_css.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <!--HEADER--> 
+    {% include "./header.html" %}
+    <!--HEADER-->
+    
+  <div class="container" style="padding: 100px;">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+            <h3 class=" text-center mb-5">
+              <img src="{%static '/imgs/football.png' %}" alt="logo" width="30">
+              &nbsp;Log in to your account&nbsp;
+              <img src="{%static '/imgs/football.png' %}" alt="logo" width="30">
+            </h3>
+
+            <form action="/login" method="post">
+              {% csrf_token %}
+              <div class="form-outline mb-4">
+                <label class="form-label">Email</label>
+                <input type="text" id="email" name="email" class="form-control form-control-lg" required />
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label">Password</label>
+                <input type="password" id="pass" name="pass" class="form-control form-control-lg" required />
+              </div>
+
+              <div class="form-outline mb-4">
+                <button type="submit" class="btn btn-primary btn-lg form-control form-control-lg">Log in</button>
+              </div>
+            </form>
+
+            <div class="text-center mt-5">
+              No account? <a href="/signup" class="fw-bold text-body text-decoration-underline">Create a new one</a>
+            </div>
+
+            <!-- <div class="text-center mt-4">
+              <a data-bs-toggle="collapse" href="#zaboravljenaLozinka" role="button" aria-expanded="false"
+                aria-controls="zaboravljenaLozinka" class="text-body">Zaboravljena lozinka?</a>
+            </div> -->
+
+            <!-- <div class="collapse mt-5" id="zaboravljenaLozinka">
+              <form action="/signin" method="post">
+                <div class="form-outline mb-4">
+                  <label id="label" class="form-label" for="email">Unesite e-mail s kojim ste
+                    se registrirali</label>
+                  <input type="text" id="email" name="email" placeholder="E-mail"
+                    class="form-control form-control-lg" required/>
+                </div>
+                <div class="form-outline mb-4">
+                  <button id="emailgumb" type="submit"
+                    class="btn btn-primary btn-lg form-control form-control-lg">Pošalji novu lozinku na
+                    e-mail</button>
+                </div>
+              </form>
+            </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!--FOOTER--> 
+    {% include "./footer.html" %}
+    <!--FOOTER-->
+
+</body>
+
+
+<script src="{% static '/js/bootstrap.js' %}"></script>
+
+</html>
+
+
+

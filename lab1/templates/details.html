@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+
+    <link href="{% static '/css/bootstrap/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/js/jquery-ui-1.13.2/jquery-ui.min.css' %} ">
+
+    <!-- custom-->
+    <link href="{% static '/css/my_css.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <!--HEADER--> 
+    {% include "./header.html" %}
+    <!--HEADER-->
+
+    <div class="container p-5" style="padding-top: 80px !important;">
+        
+        <div class="text-center" style="padding-bottom: 20px;">
+            <img src="{% static '/imgs/premier2.png' %}" alt="premier" width="30%">
+        </div>
+
+        <!-- <hr/> -->
+
+        <div class="pt-5 d-flex align-items-center justify-content-center">
+            <h3 class="p-5">This club</h3>
+            <h1>
+                <span class="badge bg-secondary">3</span>
+                <span>:</span>
+                <span class="badge bg-secondary">5</span>
+            </h1>
+            <h3 class="p-5">That club</h3>
+        </div>
+
+        <div class="pt-5">
+            <h3>Comments</h3>
+            <hr>
+            <div class="pt-5">
+                <div class="card">
+                    <form action="/details" method="post">
+                        <div class="card-header d-flex justify-content-between">
+                            Write your comment here.
+                        </div>
+                        <div class="card-body">
+                          <p class="card-text">
+                                <textarea class="form-control" id="body" rows="3" placeholder="Your comment..."></textarea>
+                          </p>
+                        </div>
+                        <div class="card-footer" style="text-align: right;">
+                        <button type="submit" class="btn btn-primary">Add comment</button>
+                        </div>
+                    </form>
+              </div>
+            </div>
+
+            <div class="pt-5">
+                <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <span>username</span>
+                  <span class="text-danger"><a href="#"><img src="{% static '/imgs/trash.png' %}" width="20px;" alt="trash" data-toggle="tooltip" title="Delete comment"></a></span>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+                <div class="card-footer" style="text-align: right;"><i>date</i></div>
+              </div>
+            </div>
+            <div class="pt-5">
+                <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <span>username</span>
+                  <span class="text-danger"><a href="#"><img src="{% static '/imgs/trash.png' %}" width="20px;" alt="trash" data-toggle="tooltip" title="Delete comment"></a></span>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+                <div class="card-footer" style="text-align: right;"><i>date</i></div>
+              </div>
+            </div>
+            
+        </div>
+
+        
+
+    </div>
+
+
+    <!--FOOTER--> 
+    {% include "./footer.html" %}
+    <!--FOOTER-->
+
+</body>
+
+<script src="{% static '/js/jquery-ui-1.13.2/external/jquery/jquery.js' %}"></script>
+<script src="{% static '/js/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
+<script src="{% static '/js/bootstrap/bootstrap.js' %}"></script>
+<script src="{% static '/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+</html>
+<script>
+    $('[data-toggle="tooltip"]').tooltip()
+</script>
+
+

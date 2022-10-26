@@ -1,0 +1,36 @@
+.btn-primary {
+    background-color: #71c285;
+    border-color: #71c285
+}
+
+.btn-primary:hover {
+    background-color: #4c8056;
+    border-color: #4c8056;
+}
+
+.thead-light {
+    background-color: #e9ecef;
+}
+
+.thead-dark {
+    background-color: #212529;
+}
+
+.bg-badge {
+    background-color: #71c285;
+    border-color: #71c285;
+    color: white;
+}
+
+.bg-badge:hover {
+    background-color: #4c8056;
+    border-color: #4c8056;
+    color: white;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.6rem;
+    border-radius: 0.2rem;
+    font-weight: bold;
+}
