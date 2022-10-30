@@ -52,7 +52,7 @@ team_names = { "MCI" : "Man City"
             }
 
 for nickname, name in team_names.items():
-    new_team = models.Teams(nickame=nickname, name=name)
+    new_team = models.Teams(nickname=nickname, name=name)
     new_team.save()
 
 
