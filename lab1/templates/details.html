@@ -28,27 +28,32 @@
         <!-- <hr/> -->
 
         <div class="pt-5 d-flex align-items-center justify-content-center">
-            <h3 class="p-5">This club</h3>
+            <h3 class="p-5">{{match.team1.name}}</h3>
             <h1>
-                <span class="badge bg-secondary">3</span>
+                <span class="badge bg-secondary">{{match.goals1}}</span>
                 <span>:</span>
-                <span class="badge bg-secondary">5</span>
+                <span class="badge bg-secondary">{{match.goals2}}</span>
             </h1>
-            <h3 class="p-5">That club</h3>
+            <h3 class="p-5">{{match.team2.name}}</h3>
         </div>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <h5>{{match.date}} {{match.time}}</h5>
+      </div>
 
         <div class="pt-5">
             <h3>Comments</h3>
             <hr>
             <div class="pt-5">
                 <div class="card">
-                    <form action="/details" method="post">
+                    <form action="/add_comment/{{match.id}}" method="post">
+                      {% csrf_token %}
                         <div class="card-header d-flex justify-content-between">
                             Write your comment here.
                         </div>
                         <div class="card-body">
                           <p class="card-text">
-                                <textarea class="form-control" id="body" rows="3" placeholder="Your comment..."></textarea>
+                                <textarea class="form-control" id="body" rows="3" name="comment" placeholder="Your comment..."></textarea>
                           </p>
                         </div>
                         <div class="card-footer" style="text-align: right;">
@@ -57,31 +62,40 @@
                     </form>
               </div>
             </div>
-
-            <div class="pt-5">
+            
+            {% for comment in comments %}
+            <form action="/edit_comment/{{comment.id}}" method="post">
+              {% csrf_token %}
+              <div class="pt-5">
                 <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                  <span>username</span>
-                  <span class="text-danger"><a href="#"><img src="{% static '/imgs/trash.png' %}" width="20px;" alt="trash" data-toggle="tooltip" title="Delete comment"></a></span>
+                  <span>{{comment.user.name}}</span>
+                  <span>
+                    {% if session.userinfo.name == comment.user_id.email or session.userinfo.name == ADMIN_EMAIL %}
+                    <a onclick="edit_comment({{comment.id}}, '{{comment.comment}}');"><img src="{% static '/imgs/editing.png' %}" width="20px;" alt="edit" data-toggle="tooltip" title="Edit comment"></a>
+                    <a href="/delete_comment/{{comment.id}}"  class="text-danger"><img src="{% static '/imgs/trash.png' %}" width="20px;" alt="trash" data-toggle="tooltip" title="Delete comment"></a>
+                    {% endif %}
+                  </span>
                 </div>
                 <div class="card-body">
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <p class="card-text" id="comment_text_{{comment.id}}">{{comment.comment}}</p>
+                  <div id="edit_yes_no_{{comment.id}}" class="d-flex justify-content-end d-none">
+                    <button type="submit" class="btn btn-sm btn-primary">✓</button>
+                    <button type="button" class="btn btn-sm btn-secondary" style="margin-left: 5px;" onclick="discard_edit_comment({{comment.id}});">X</button>
+                  </div>
                 </div>
-                <div class="card-footer" style="text-align: right;"><i>date</i></div>
+                <div class="card-footer" style="text-align: right;">
+                  {% if comment.changed != comment.created %}
+                  <i>(Edited)</i> {{comment.changed}}
+                  {% else %}
+                  {{comment.created}}
+                  {% endif %}
+                </div>
               </div>
             </div>
-            <div class="pt-5">
-                <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                  <span>username</span>
-                  <span class="text-danger"><a href="#"><img src="{% static '/imgs/trash.png' %}" width="20px;" alt="trash" data-toggle="tooltip" title="Delete comment"></a></span>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer" style="text-align: right;"><i>date</i></div>
-              </div>
-            </div>
+            </form>
+            
+            {% endfor %}
             
         </div>
 
@@ -103,6 +117,24 @@
 
 </html>
 <script>
+
+  var old_text = {};
+
+    var edit_comment = (comment_id, comment) => {
+      debugger;
+      old_text[comment_id] = comment
+      html_content = '<textarea class="form-control" rows="3" name="comment">'+ comment + '</textarea>'
+      
+      $('#comment_text_' + comment_id).html(html_content);
+      $('#edit_yes_no_' + comment_id).removeClass('d-none');
+    }
+
+    var discard_edit_comment = (comment_id) => {
+      $('#comment_text_' + comment_id).html(old_text[comment_id]);
+      $('#edit_yes_no_' + comment_id).addClass('d-none');
+    }
+
+    // initialize tooltip
     $('[data-toggle="tooltip"]').tooltip()
 </script>
 

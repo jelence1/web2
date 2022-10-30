@@ -28,32 +28,57 @@
         <!-- <hr/> -->
 
         <div class="pt-5">
-            <h3>Matches</h3>
+            <h3>
+              Matches &nbsp; 
+              {% if session.userinfo.name == ADMIN_EMAIL %} 
+              <button class="btn btn-primary" onclick="add_match_modal();" data-target="#add_match_modal" data-toggle="modal">Add</button>
+              {% endif %}
+            </h3>
         <table class="table table-responsive table-bordered">
             <thead class="thead-light">
-              <tr>
+              <tr class="text-center">
                 <th style="min-width: 100px;">Team 1</th>
+                <th style="max-width: 40px;">Score</th>
                 <th style="min-width: 100px;">Team 2</th>
-                <th class="text-center" style="max-width: 40px;">Score</th>
-                <th class="text-center">Date & Time</th>
+                <th>Date & Time</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td class="text-center">3:2</td>
-                <td class="text-center">@mdo</td>
-                <td class="text-center" style="max-width: 30px;"><a class="badge bg-badge" href="/details">Details</a></td>
+              {% for match in matches %}
+              <tr class="text-center {% if match.goals1 is None or match.goals2 is None %} bg-light {% endif %}" id="tr_{{match.id}}">
+                <form action="/edit_match/{{match.id}}" method="post">
+                  {% csrf_token %}
+                  <td>{{match.team1.name}}</td>
+                <td> 
+                  {% if match.goals1 is None or match.goals2 is None %}
+                    -
+                  {% else %}
+                    {{match.goals1}} : {{match.goals2}}
+                  {% endif %}
+                </td>
+                <td >{{match.team2.name}}</td>
+                <td>{{match.date}} {{match.time}}</td>
+                <td id="td_btns_{{match.id}}">
+                  {% if session and match.goals1 is not None and match.goals2 is not None%}
+                    <a class="badge bg-badge" href="/details/{{match.id}}">Details</a> &nbsp;
+                  {% endif %}
+                  {% if session.userinfo.name == ADMIN_EMAIL %}
+                    <a onclick="edit_match_modal({{match.id}}, {{match.team1.id}}, {{match.team2.id}}, {{match.goals1|default_if_none:'undefined'}}, {{match.goals2|default_if_none:'undefined'}}, '{{match.date}}', '{{match.time}}');" data-toggle="tooltip" title="Edit match"><img src="{% static '/imgs/editing.png' %}" width="20px;"></a>
+                    <a href="/delete_match/{{match.id}}"  class="text-danger"><img src="{% static '/imgs/trash.png' %}" width="20px;" alt="trash" data-toggle="tooltip" title="Delete match"></a>
+                  {% endif %}
+                </td>
+                </form>
+                
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
 
         <div class="pt-5">
             <h3>Ranking</h3>
-        <table class="table   table-responsive table-bordered">
+        <table class="table table-responsive table-bordered">
             <thead class="thead-light">
               <tr class="text-center">
                 <th style="text-align: left;">#</th>
@@ -68,23 +93,45 @@
               </tr>
             </thead>
             <tbody>
+              {% for team in teams %}
               <tr class="text-center">
-                <th scope="row" style="text-align: left;">1</th>
-                <td style="text-align: left;">Mark</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>12</td>
+                <th scope="row" style="text-align: left;">{{forloop.counter}}</th>
+                <td style="text-align: left;">{{team.name}}</td>
+                <td>{{team.played}}</td>
+                <td>{{team.won}}</td>
+                <td>{{team.lost}}</td>
+                <td>{{team.draw}}</td>
+                <td>{{team.points}}</td>
                 <td style="max-width: 80px;">
-                  <span class="btn btn-sm btn-success" data-toggle="tooltip" title="date, team">W</span>
-                  <span class="btn btn-sm btn-success">W</span>
-                  <span class="btn btn-sm btn-success">W</span>
-                  <span class="btn btn-sm btn-success">W</span>
-                  <span class="btn btn-sm btn-success">W</span>
+                  {% for key, values in teams_matches.items %}
+                      {% if key == team %}
+                        {% for value in values %}
+                          {% if value.goals1 == value.goals2 and value.goals1 is not None %}
+                        <a class="btn btn-sm btn-warning" data-toggle="tooltip" 
+                        href="{% if session %} /details/{{value.id}} {% endif %}"
+                        title="{{value.team1.nickname}} {{value.goals1}}:{{value.goals2}} {{value.team2.nickname}} ({{value.date}}, {{value.time}})">
+                        D
+                        </a>
+                          {% elif value.goals1 > value.goals2 and value.team1 == key or value.goals1 < value.goals2 and value.team2 == key %}
+                        <a class="btn btn-sm btn-success" data-toggle="tooltip" 
+                        href="{% if session %} /details/{{value.id}} {% endif %}"
+                        title="{{value.team1.nickname}} {{value.goals1}}:{{value.goals2}} {{value.team2.nickname}} ({{value.date}}, {{value.time}})">
+                          W
+                        </a>
+                          {% elif value.goals1 < value.goals2 and value.team1 == key or value.goals1 > value.goals2 and value.team2 == key %}
+                        <a class="btn btn-sm btn-danger" data-toggle="tooltip" 
+                        href="{% if session %} /details/{{value.id}} {% endif %}"
+                        title="{{value.team1.nickname}} {{value.goals1}}:{{value.goals2}} {{value.team2.nickname}} ({{value.date}}, {{value.time}}) ">
+                          L
+                        </a>
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                  {% endfor %}
                 </td>
-                <td>@mdo</td>
+                <td>{{team.win_percent}}</td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
@@ -96,16 +143,75 @@
     {% include "./footer.html" %}
     <!--FOOTER-->
 
+    {% include "./modals.html" %}
+
 </body>
 
 <script src="{% static '/js/jquery-ui-1.13.2/external/jquery/jquery.js' %}"></script>
 <script src="{% static '/js/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
 <script src="{% static '/js/bootstrap/bootstrap.js' %}"></script>
+<script src="{% static '/js/bootstrap/bootstrap.min.js' %}"></script>
 <script src="{% static '/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 
 </html>
 <script>
+
+  rows = {}
+
+    // display modal
+    var add_match_modal = () => {
+      $('#header_id').text('Add match');
+      $('#modal_form_id').attr('action', '/add_match');
+      $('#add_match_modal').modal('show');
+    }
+
+    var edit_match_modal = (match_id, team1_id, team2_id, goals1, goals2, date, time) => {
+      $('#header_id').text('Edit match');
+      $('#team1_id').val(team1_id);
+      $('#team2_id').val(team2_id);
+      $('#match_goals1').val(goals1);
+      $('#match_goals2').val(goals2);
+      $('#match_date').val(Date.parse(date));
+      $('#match_time').val(time);
+      $('#modal_form_id').attr('action', '/edit_match/' + match_id);
+
+      $('#add_match_modal').modal('show');
+
+      check_match_date();
+    }
+
+    // check if today's date is earlier than the match - disable score inputs
+    var check_match_date = () => {
+      let today = new Date();
+      let match = Date.parse($('#match_date_add').val());
+      if ( match > today ) {
+
+        $('#match_goals1').val('');
+        $('#match_goals2').val('');
+
+        $('#match_goals1').prop('disabled', true);
+        $('#match_goals2').prop('disabled', true);
+
+        $("#match_goals1").prop('required', false);
+        $("#match_goals2").prop('required', false);
+
+      }
+      else {
+        $("#match_goals1_add").prop('disabled', false);
+        $("#match_goals2_add").prop('disabled', false);
+
+        $("#match_goals1_add").prop('required', true);
+        $("#match_goals2_add").prop('required', true);
+      }
+    
+    }
+
+    // initialize tooltip
     $('[data-toggle="tooltip"]').tooltip()
+
+    // bind match_date validation with input
+    $('#match_date_add').on('change', check_match_date);
+
 </script>
 
 

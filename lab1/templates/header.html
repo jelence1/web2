@@ -10,17 +10,22 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/"><img src="{%static '/imgs/home.png' %}" alt="home" width="20"></a>
+              </li>
+              {% if session %}
+              <li class="nav-item">
+                <span class="nav-link"><img src="{{session.userinfo.picture}}" alt="user" width="25" data-toggle="tooltip" title="{{session.userinfo.nickname}}"></span>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="{% url 'logout' %}"><img src="{%static '/imgs/logout.png' %}" alt="logout" width="20" data-toggle="tooltip" title="Logout"></a>
               </li>
+              {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="/signup">Signup</a>
+                <a class="nav-link" href="{% url 'login' %}" data-toggle="tooltip" title="Login">
+                  <img src="{% static '/imgs/enter.png' %}" alt="login" width="20">
+                </a>
               </li>
-              <li class="nav-item">
-                <span class="nav-link"><img src="{%static '/imgs/user.png' %}" alt="user" width="30" data-toggle="tooltip" title="User"></span>
-              </li>
+              {% endif %}
             </ul>
           </div>
         </div>
