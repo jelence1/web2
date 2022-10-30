@@ -28,6 +28,37 @@ oauth.register(
 )
 
 
+# generate teams #
+team_names = { "MCI" : "Man City"
+            , "ARS" : "Arsenal"
+            , "TOT" : "Tottenham"
+            , "NEW" : "Newcastle"
+            , "CHE" : "Chelsea"
+            , "MUN" : "Man Utd"
+            , "BRH" : "Brighton"
+            , "FUL" : "Fulham"
+            , "LIV" : "Liverpool"
+            , "CRY" : "Crystal Palace"
+            , "BRE" : "Brentford"
+            , "WHU" : "West Ham"
+            , "EVE" : "Everton"
+            , "BOU" : "Bournemouth"
+            , "AVL" : "Aston Villa"
+            , "SOU" : "Southampton"
+            , "LEI" : "Leicester"
+            , "WLV" : "Wolverhampton"
+            , "LEE" : "Leeds United"
+            , "NTF" : "Nottingham Forest"
+            }
+
+for nickname, name in team_names.items():
+    new_team = models.Teams(nickame=nickname, name=name)
+    new_team.save()
+
+
+
+## views ##
+
 def index(request):
     teams = models.Teams.objects.all().order_by("-points", "-won")
     teams_matches = {}
