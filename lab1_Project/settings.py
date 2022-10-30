@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://web2-lab1-64oc.onrender.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "web2-lab1-64oc.onrender.com"]
 
 
 # Application definition

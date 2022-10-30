@@ -14,7 +14,7 @@
               </li>
               {% if session %}
               <li class="nav-item">
-                <span class="nav-link"><img src="{{session.userinfo.picture}}" alt="user" width="25" data-toggle="tooltip" title="{{session.userinfo.nickname}}"></span>
+                <span class="nav-link"><img src="{{session.userinfo.picture}}" alt="user" width="25" data-toggle="tooltip" title="{{session.userinfo.nickname}} {% if session.userinfo.name == ADMIN_EMAIL %} (Admin) {% endif %} "></span>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}"><img src="{%static '/imgs/logout.png' %}" alt="logout" width="20" data-toggle="tooltip" title="Logout"></a>
