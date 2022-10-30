@@ -8,6 +8,6 @@ python manage.py flush --no-input
 
 python manage.py collectstatic --no-input
 
-python manage.py loadddata. data.json
+python manage.py loaddata data.json
 python manage.py makemigrations
 python manage.py migrate
