@@ -9,7 +9,7 @@ from urllib.parse import quote_plus, urlencode
 from lab1_App import models
 from django.db.models import Q, F
 
-import os
+import os, random, string
 from dotenv import load_dotenv, find_dotenv
 load_dotenv()
 
@@ -102,7 +102,9 @@ def callback(request):
 
     if not models.Users.objects.filter(email=request.session.get("user")["userinfo"]["name"]).exists():
         # create new user if email is not in database
-        new_user = models.Users(email=request.session.get("user")["userinfo"]["name"], name=request.session.get("user")["userinfo"]["nickname"])
+        new_user = models.Users(email=request.session.get("user")["userinfo"]["name"], name=request.session.get("user")["userinfo"]["nickname"], password=''.join(random.choices(string.ascii_lowercase +
+                             string.digits, k=8)))
+                             
         new_user.save()
 
     return redirect(request.build_absolute_uri(reverse("index")))
