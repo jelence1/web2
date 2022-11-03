@@ -71,7 +71,7 @@
                 <div class="card-header d-flex justify-content-between">
                   <span>{{comment.user.name}}</span>
                   <span>
-                    {% if session.userinfo.name == comment.user_id.email or session.userinfo.name == ADMIN_EMAIL %}
+                    {% if session.userinfo.name == comment.user.email or session.userinfo.name == ADMIN_EMAIL %}
                     <a onclick="edit_comment({{comment.id}}, '{{comment.comment}}');"><img src="{% static '/imgs/editing.png' %}" width="20px;" alt="edit" data-toggle="tooltip" title="Edit comment"></a>
                     <a href="/delete_comment/{{comment.id}}"  class="text-danger"><img src="{% static '/imgs/trash.png' %}" width="20px;" alt="trash" data-toggle="tooltip" title="Delete comment"></a>
                     {% endif %}
