@@ -183,7 +183,7 @@
     // check if today's date is earlier than the match - disable score inputs
     var check_match_date = () => {
       let today = new Date();
-      let match = Date.parse($('#match_date_add').val());
+      let match = Date.parse($('#match_date').val());
       if ( match > today ) {
 
         $('#match_goals1').val('');
@@ -197,11 +197,11 @@
 
       }
       else {
-        $("#match_goals1_add").prop('disabled', false);
-        $("#match_goals2_add").prop('disabled', false);
+        $("#match_goals1").prop('disabled', false);
+        $("#match_goals2").prop('disabled', false);
 
-        $("#match_goals1_add").prop('required', true);
-        $("#match_goals2_add").prop('required', true);
+        $("#match_goals1").prop('required', true);
+        $("#match_goals2").prop('required', true);
       }
     
     }
@@ -210,7 +210,7 @@
     $('[data-toggle="tooltip"]').tooltip()
 
     // bind match_date validation with input
-    $('#match_date_add').on('change', check_match_date);
+    $('#match_date').on('change', check_match_date);
 
 </script>
 
