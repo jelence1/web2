@@ -6,6 +6,9 @@ class Users(models.Model):
     name = models.CharField(max_length=1000, default="user")
     role = models.CharField(max_length=1000)
     email = models.CharField(max_length=1000, unique=True)
+    password = models.CharField(max_length=1000)
+    first_name = models.CharField(max_length=1000)
+    last_name = models.CharField(max_length=1000)
 
 class Teams(models.Model):
     id = models.AutoField(primary_key=True)

@@ -5,7 +5,10 @@
       "fields": {
         "name": "asdfgvbn",
         "role": "admin",
-        "email": "asdfgvbn@kjh.com"
+        "email": "asdfgvbn@kjh.com",
+        "password": "VrloSnaznaAdminLozinka",
+        "first_name": "Admin",
+        "last_name": "Adminković"
       }
     },
     {
@@ -14,7 +17,94 @@
       "fields": {
         "name": "marijeta123",
         "role": "",
-        "email": "marijeta123@krompir.hr"
+        "email": "marijeta123@krompir.hr",
+        "password": "marijetavoliugljikohidrate",
+        "first_name": "Marijeta",
+        "last_name": "Krompirko"
+      }
+    },
+    {
+      "model": "lab1_App.users",
+      "pk": 3,
+      "fields": {
+        "name": "snjeska",
+        "role": "user",
+        "email": "mrma@zima.hr",
+        "password": "ledledeni123",
+        "first_name": "Snješka",
+        "last_name": "Mrzlić"
+      }
+    },
+    {
+      "model": "lab1_App.users",
+      "pk": 4,
+      "fields": {
+        "name": "seka",
+        "role": "user",
+        "email": "seka@aleksic.rs",
+        "password": "pevaljka007",
+        "first_name": "Seka",
+        "last_name": "Aleksić"
+      }
+    },
+    {
+      "model": "lab1_App.users",
+      "pk": 5,
+      "fields": {
+        "name": "gabica",
+        "role": "user",
+        "email": "grabijela@gmail.com",
+        "password": "PamtimSamoSretneDane",
+        "first_name": "Gabi",
+        "last_name": "Novak"
+      }
+    },
+    {
+      "model": "lab1_App.users",
+      "pk": 6,
+      "fields": {
+        "name": "koka",
+        "role": "user",
+        "email": "emica.koks@email.com",
+        "password": "RockMeBaby",
+        "first_name": "Emilija",
+        "last_name": "Kokić"
+      }
+    },
+    {
+      "model": "lab1_App.users",
+      "pk": 7,
+      "fields": {
+        "name": "cetina",
+        "role": "user",
+        "email": "moremore@mail.hr",
+        "password": "PotraziMeUPredgradu",
+        "first_name": "Meri",
+        "last_name": "Cetinić"
+      }
+    },
+    {
+      "model": "lab1_App.users",
+      "pk": 8,
+      "fields": {
+        "name": "zicaros",
+        "role": "user",
+        "email": "molim@bodove.hr",
+        "password": "dajbodpls123",
+        "first_name": "Molim",
+        "last_name": "Bodove"
+      }
+    },
+    {
+      "model": "lab1_App.users",
+      "pk": 9,
+      "fields": {
+        "name": "dedo",
+        "role": "user",
+        "email": "jasamdedo@hotmail.com",
+        "password": "OnoSveStoZnasOMeni",
+        "first_name": "Arsen",
+        "last_name": "Dedić"
       }
     },
     {
